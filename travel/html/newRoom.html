@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="/css/newHotel.css">
+    <link rel="shortcut icon" href="/image/favicon.ico">
+    <link href="https://api.fontshare.com/v2/css?f[]=telma@400&display=swap" rel="stylesheet">
+    <link href="https://api.fontshare.com/v2/css?f[]=zodiak@101&display=swap" rel="stylesheet">
+    <link href="https://api.fontshare.com/v2/css?f[]=pally@400&display=swap" rel="stylesheet">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Lobster&display=swap" rel="stylesheet">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Great+Vibes&family=Lobster&display=swap" rel="stylesheet">
+</head>
+<body>
+    <div class="MAIN__wrap">
+
+        <header class="header">
+
+            <div class="container">
+                <div class="header__el">
+    
+                    <ul class="logo">
+                        <div class="header--name"><a href="../html/workPage.html">Travel agency</a></div>
+                        <img class="small_icon" src="../image/r.png" alt="">
+                    </ul>
+    
+                    <a class="header__a" href="../html/settingsForAdmin.html">Назад</a>
+                    <a id="exit__button" class="header__a" href="../html/index.html">Выход</a>
+                </div>
+                
+            </div>
+    
+        </header>   
+
+        <main class="main">
+            <div class="container">
+                <form action="" class="form">
+                    <h3 class="form__h">Создать номер</h3>
+
+                   
+                   
+                    <input id="nameHotel" class="formItem" type="text" list="hotelList" placeholder="Введите название отеля">
+                    <datalist id="hotelList"></datalist>
+                   
+                    <input id="name" type="text"  class="forms--login formItem" placeholder="Введите название номера">
+                   
+                    <textarea id="descr" class="formItem formItem__maxWidth" placeholder="Введите описание номера"></textarea>
+
+                    <button class="forms__button" onclick="newRoom()">Создать</button>
+
+                </form>
+            </div>
+           
+        </main>
+
+    </div>
+    <script src="../js/newRoom.js"></script>
+</body>
