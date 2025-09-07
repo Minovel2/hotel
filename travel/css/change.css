@@ -1,0 +1,447 @@
+/* Общие стили */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Pally', 'Zodiak', sans-serif;
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    min-height: 100vh;
+    color: #333;
+    line-height: 1.6;
+}
+
+.container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 20px;
+}
+
+/* Хедер */
+.header {
+    background: rgba(255, 255, 255, 0.95);
+    backdrop-filter: blur(10px);
+    padding: 20px 0;
+    box-shadow: 0 2px 20px rgba(0, 0, 0, 0.1);
+    position: sticky;
+    top: 0;
+    z-index: 1000;
+}
+
+.header__el {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 20px;
+}
+
+.logo {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+    list-style: none;
+}
+
+.header--name a {
+    font-family: 'Lobster', cursive;
+    font-size: 2rem;
+    color: #667eea;
+    text-decoration: none;
+    transition: color 0.3s ease;
+}
+
+.header--name a:hover {
+    color: #764ba2;
+}
+
+.small_icon {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    object-fit: cover;
+}
+
+.header__a {
+    text-decoration: none;
+    color: #333;
+    font-weight: 500;
+    padding: 10px 20px;
+    border-radius: 25px;
+    transition: all 0.3s ease;
+    border: 2px solid transparent;
+}
+
+.header__a:hover {
+    background: #667eea;
+    color: white;
+    transform: translateY(-2px);
+}
+
+#exit__button {
+    background: #ff4757;
+    color: white;
+}
+
+#exit__button:hover {
+    background: #ff3742;
+    transform: translateY(-2px);
+}
+
+/* Основной контент */
+.MAIN__wrap {
+    padding: 40px 0;
+    min-height: calc(100vh - 100px);
+    transition: filter 0.3s ease;
+}
+
+.MAIN__wrap.blur {
+    filter: blur(5px);
+    pointer-events: none;
+}
+
+.hotels {
+    padding: 40px 0;
+}
+
+.listOfHotels {
+    list-style: none;
+    display: grid;
+    gap: 30px;
+}
+
+.li {
+    background: rgba(255, 255, 255, 0.95);
+    border-radius: 20px;
+    padding: 30px;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.li:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 15px 40px rgba(0, 0, 0, 0.15);
+}
+
+.ItemWrapper {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+}
+
+.item__h {
+    font-family: 'Telma', cursive;
+    font-size: 1.8rem;
+    color: #667eea;
+    margin-bottom: 10px;
+}
+
+.item__p {
+    line-height: 1.6;
+    color: #666;
+    margin-bottom: 20px;
+}
+
+.menu__button__wrap {
+    display: flex;
+    gap: 15px;
+    flex-wrap: wrap;
+}
+
+.item__button, .menu__button {
+    padding: 12px 25px;
+    border: none;
+    border-radius: 20px;
+    cursor: pointer;
+    font-size: 1rem;
+    transition: all 0.3s ease;
+    font-weight: 500;
+}
+
+.item__button {
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    color: white;
+}
+
+.item__button:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 5px 15px rgba(102, 126, 234, 0.4);
+}
+
+.menu__button.delete {
+    background: #ff4757;
+    color: white;
+}
+
+.menu__button.delete:hover {
+    background: #ff3742;
+    transform: translateY(-2px);
+}
+
+.menu__button.edit {
+    background: #f39c12;
+    color: white;
+}
+
+.menu__button.edit:hover {
+    background: #e67e22;
+    transform: translateY(-2px);
+}
+
+/* Выпадающее меню номеров */
+.menu__ul {
+    display: none;
+    list-style: none;
+    margin-top: 20px;
+    padding-top: 20px;
+    border-top: 2px solid #eee;
+    gap: 20px;
+}
+
+.menu__ul.show {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+}
+
+.menu__ul__el {
+    background: #f8f9fa;
+    padding: 20px;
+    border-radius: 15px;
+    border-left: 4px solid #667eea;
+}
+
+.menu__h {
+    font-size: 1.3rem;
+    color: #333;
+    margin-bottom: 10px;
+}
+
+.menu__p {
+    color: #666;
+    line-height: 1.5;
+}
+
+/* Меню редактирования */
+.editMenu {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%) scale(0);
+    background: white;
+    padding: 40px;
+    border-radius: 20px;
+    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.2);
+    z-index: 2000;
+    transition: transform 0.3s ease;
+    min-width: 500px;
+    max-width: 90%;
+    max-height: 90vh;
+    overflow-y: auto;
+}
+
+.editMenu.show {
+    transform: translate(-50%, -50%) scale(1);
+}
+
+.editMenu__wrap {
+    position: relative;
+}
+
+.edit__h {
+    font-family: 'Telma', cursive;
+    color: #667eea;
+    margin-bottom: 25px;
+    text-align: center;
+    font-size: 2rem;
+}
+
+.edit__p {
+    color: #666;
+    margin-bottom: 15px;
+    font-weight: 500;
+}
+
+.close {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    background: none;
+    border: none;
+    cursor: pointer;
+    padding: 5px;
+    border-radius: 50%;
+    transition: background 0.3s ease;
+}
+
+.close:hover {
+    background: #f1f2f6;
+}
+
+.roomList {
+    list-style: none;
+    margin-bottom: 25px;
+    max-height: 150px;
+    overflow-y: auto;
+    border: 1px solid #ddd;
+    border-radius: 10px;
+    padding: 10px;
+}
+
+.room__item {
+    padding: 10px 15px;
+    border-radius: 8px;
+    margin-bottom: 5px;
+    cursor: pointer;
+    transition: background 0.3s ease;
+}
+
+.room__item:hover {
+    background: #e3f2fd;
+}
+
+.room__item:last-child {
+    margin-bottom: 0;
+}
+
+.editMenu__elWrap {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 30px;
+}
+
+.editMenu__el {
+    background: #f8f9fa;
+    padding: 20px;
+    border-radius: 15px;
+}
+
+.form {
+    width: 100%;
+    padding: 12px 15px;
+    border: 2px solid #ddd;
+    border-radius: 10px;
+    margin-bottom: 15px;
+    font-family: inherit;
+    font-size: 1rem;
+    transition: border-color 0.3s ease;
+}
+
+.form:focus {
+    outline: none;
+    border-color: #667eea;
+}
+
+.maxWidth {
+    min-height: 100px;
+    resize: vertical;
+}
+
+.editButton {
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    color: white;
+    border: none;
+    padding: 12px 25px;
+    border-radius: 20px;
+    cursor: pointer;
+    font-size: 1rem;
+    transition: all 0.3s ease;
+}
+
+.editButton:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 5px 15px rgba(102, 126, 234, 0.4);
+}
+
+.button__wrap {
+    display: flex;
+    gap: 10px;
+    flex-wrap: wrap;
+}
+
+.button__wrap .editButton:first-child {
+    background: linear-gradient(135deg, #ff4757 0%, #ff3742 100%);
+}
+
+/* Анимации */
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.li {
+    animation: fadeIn 0.6s ease forwards;
+}
+
+.menu__ul__el {
+    animation: fadeIn 0.4s ease forwards;
+}
+
+/* Адаптивность */
+@media (max-width: 768px) {
+    .header__el {
+        flex-direction: column;
+        text-align: center;
+    }
+    
+    .editMenu__elWrap {
+        grid-template-columns: 1fr;
+    }
+    
+    .editMenu {
+        min-width: 90%;
+        padding: 30px 20px;
+    }
+    
+    .menu__button__wrap {
+        flex-direction: column;
+    }
+    
+    .menu__ul.show {
+        grid-template-columns: 1fr;
+    }
+}
+
+@media (max-width: 480px) {
+    .header--name a {
+        font-size: 1.5rem;
+    }
+    
+    .item__h {
+        font-size: 1.5rem;
+    }
+    
+    .edit__h {
+        font-size: 1.5rem;
+    }
+    
+    .button__wrap {
+        flex-direction: column;
+    }
+}
+
+/* Кастомный скроллбар */
+::-webkit-scrollbar {
+    width: 8px;
+}
+
+::-webkit-scrollbar-track {
+    background: #f1f1f1;
+    border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb {
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+    background: #5a67d8;
+}

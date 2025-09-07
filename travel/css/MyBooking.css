@@ -1,0 +1,303 @@
+:root {
+            --primary-color: #6C63FF;
+            --secondary-color: #FF6584;
+            --success-color: #4CAF50;
+            --warning-color: #FF9800;
+            --background-color: #f9f9f9;
+            --text-color: #333333;
+            --light-gray: #e0e0e0;
+            --white: #ffffff;
+            --shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+            --transition: all 0.3s ease;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Pally', sans-serif;
+            background-color: var(--background-color);
+            color: var(--text-color);
+            min-height: 100vh;
+            background-image: 
+                radial-gradient(circle at 10% 20%, rgba(108, 99, 255, 0.1) 0%, transparent 20%),
+                radial-gradient(circle at 90% 80%, rgba(255, 101, 132, 0.1) 0%, transparent 20%);
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        /* Header Styles */
+        .header {
+            background-color: var(--white);
+            box-shadow: var(--shadow);
+            padding: 15px 0;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+
+        .header__el {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            text-decoration: none;
+        }
+
+        .header--name a {
+            font-family: 'Lobster', cursive;
+            font-size: 1.8rem;
+            color: var(--primary-color);
+            text-decoration: none;
+            transition: var(--transition);
+        }
+
+        .header--name a:hover {
+            color: var(--secondary-color);
+        }
+
+        .small_icon {
+            width: 30px;
+            height: 30px;
+        }
+
+        .header__a {
+            padding: 10px 20px;
+            background: linear-gradient(45deg, var(--primary-color), #837dff);
+            color: white;
+            text-decoration: none;
+            border-radius: 8px;
+            font-weight: 600;
+            transition: var(--transition);
+            margin-left: 15px;
+        }
+
+        .header__a:hover {
+            background: linear-gradient(45deg, #5952d3, var(--primary-color));
+            transform: translateY(-2px);
+            box-shadow: 0 4px 10px rgba(108, 99, 255, 0.3);
+        }
+
+        /* Main Content Styles */
+        .main {
+            padding: 40px 0;
+        }
+
+        .about {
+            font-family: 'Zodiak', serif;
+            text-align: center;
+            margin-bottom: 40px;
+            font-size: 2.5rem;
+            color: var(--primary-color);
+            position: relative;
+            padding-bottom: 15px;
+        }
+
+        .about::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 100px;
+            height: 4px;
+            background: linear-gradient(90deg, var(--primary-color), var(--secondary-color));
+            border-radius: 2px;
+        }
+
+        /* Booking Cards */
+        .booking {
+            background: var(--white);
+            border-radius: 16px;
+            padding: 25px;
+            margin-bottom: 25px;
+            box-shadow: var(--shadow);
+            transition: var(--transition);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .booking:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.15);
+        }
+
+        .booking__HotelName {
+            font-size: 1.8rem;
+            color: var(--primary-color);
+            margin-bottom: 10px;
+            font-family: 'Zodiak', serif;
+        }
+
+        .booking__RoomName {
+            font-size: 1.4rem;
+            color: var(--text-color);
+            margin-bottom: 20px;
+            font-weight: 500;
+        }
+
+        .menu__button {
+            padding: 12px 24px;
+            border: none;
+            border-radius: 8px;
+            font-size: 1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: var(--transition);
+            margin-right: 15px;
+            margin-bottom: 10px;
+        }
+
+        .buy__room {
+            background: linear-gradient(45deg, var(--success-color), #66BB6A);
+            color: white;
+            box-shadow: 0 4px 10px rgba(76, 175, 80, 0.3);
+        }
+
+        .buy__room:hover {
+            background: linear-gradient(45deg, #43A047, var(--success-color));
+            transform: translateY(-2px);
+            box-shadow: 0 6px 15px rgba(76, 175, 80, 0.4);
+        }
+
+        .cancel__booking {
+            background: linear-gradient(45deg, var(--secondary-color), #ff7d99);
+            color: white;
+            box-shadow: 0 4px 10px rgba(255, 101, 132, 0.3);
+        }
+
+        .cancel__booking:hover {
+            background: linear-gradient(45deg, #e91e63, var(--secondary-color));
+            transform: translateY(-2px);
+            box-shadow: 0 6px 15px rgba(255, 101, 132, 0.4);
+        }
+
+        .status {
+            position: absolute;
+            top: 25px;
+            right: 25px;
+            padding: 6px 15px;
+            border-radius: 20px;
+            font-size: 0.9rem;
+            font-weight: 600;
+        }
+
+        .status[title="Заявление отправлено, дождитесь ответа"] {
+            background-color: #FFF3CD;
+            color: #856404;
+            border: 1px solid #FFEEBA;
+        }
+
+        /* Status variations */
+        .status-отправлено {
+            background-color: #FFF3CD;
+            color: #856404;
+            border: 1px solid #FFEEBA;
+        }
+
+        .status-одобрено {
+            background-color: #D4EDDA;
+            color: #155724;
+            border: 1px solid #C3E6CB;
+        }
+
+        .status-куплено {
+            background-color: #D1ECF1;
+            color: #0C5460;
+            border: 1px solid #BEE5EB;
+        }
+
+        /* Empty state */
+        .empty-state {
+            text-align: center;
+            padding: 60px 20px;
+            background: var(--white);
+            border-radius: 16px;
+            box-shadow: var(--shadow);
+        }
+
+        .empty-state__icon {
+            font-size: 4rem;
+            color: var(--light-gray);
+            margin-bottom: 20px;
+        }
+
+        .empty-state__text {
+            font-size: 1.2rem;
+            color: #666;
+            margin-bottom: 30px;
+        }
+
+        .empty-state__button {
+            display: inline-block;
+            padding: 12px 30px;
+            background: linear-gradient(45deg, var(--primary-color), #837dff);
+            color: white;
+            text-decoration: none;
+            border-radius: 8px;
+            font-weight: 600;
+            transition: var(--transition);
+        }
+
+        .empty-state__button:hover {
+            background: linear-gradient(45deg, #5952d3, var(--primary-color));
+            transform: translateY(-2px);
+            box-shadow: 0 4px 10px rgba(108, 99, 255, 0.3);
+        }
+
+        /* Animations */
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .booking {
+            animation: fadeIn 0.6s ease forwards;
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .header__el {
+                flex-direction: column;
+                gap: 15px;
+            }
+            
+            .header__a {
+                margin: 5px;
+            }
+            
+            .about {
+                font-size: 2rem;
+            }
+            
+            .booking__HotelName {
+                font-size: 1.5rem;
+            }
+            
+            .booking__RoomName {
+                font-size: 1.2rem;
+            }
+            
+            .menu__button {
+                width: 100%;
+                margin-right: 0;
+            }
+            
+            .status {
+                position: static;
+                display: inline-block;
+                margin-top: 15px;
+            }
+        }

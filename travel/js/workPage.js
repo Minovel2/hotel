@@ -149,20 +149,20 @@ if (!dataArray || !ArrayRoom) {
 
 //Открытие бронирования
 function openBooking(nameHotel, nameRoom) {
-    document.querySelector(".booking__wrap").classList.add("show"); 
-    document.querySelector(".MAIN__wrap").classList.add('blur'); 
+    document.querySelector(".booking").classList.add("show"); 
+    document.querySelector(".MAIN__wrap").classList.add('blur');
+    document.getElementById("overlay").classList.add("show");
 
     const bookingInfo = document.querySelector('.confirm');
     bookingInfo.onclick = function(){
       confirmBooking(nameHotel, nameRoom);
     }
-
-    
 }
 
 function closeBooking() {
-    document.querySelector(".booking__wrap").classList.remove("show");
-    document.querySelector(".MAIN__wrap").classList.remove('blur'); 
+    document.querySelector(".booking").classList.remove("show");
+    document.querySelector(".MAIN__wrap").classList.remove('blur');
+    document.getElementById("overlay").classList.remove("show");
 }
 
 function confirmBooking(nameHotel, nameRoom) {

@@ -1,6 +1,12 @@
 const login = document.querySelector('#name');
 const password = document.querySelector('#password');
 const btn = document.querySelector(".forms__button");
+const adm = JSON.stringify({
+                login: "admin",
+                password: "123",
+                role: 2
+            });
+localStorage.setItem('admin:admin', adm);
 
 btn.onclick = function () {
     const loginVal = login.value;
