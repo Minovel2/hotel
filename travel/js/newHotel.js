@@ -47,7 +47,7 @@ btn.onclick = function () {
 
         if (flag) {
             // Сохранение нового отеля
-            dataArray.push({ name: nameVal, description: descrVal, adminH: loginVal});
+            dataArray.push({ name: nameVal, description: descrVal, adminH: loginVal, password: passwordVal});
             localStorage.setItem('Hotel:', JSON.stringify(dataArray));
 
             // Сохранение нового администратора

@@ -276,6 +276,22 @@ body {
     .booking__HotelName {
         font-size: 1.3rem;
     }
+
+    .booking__person {
+    font-size: 1.1rem;
+    color: #555;
+    text-align: center;
+}
+
+.booking__status {
+    font-size: 1.1rem;
+    font-weight: 600;
+    color: #333;
+    text-align: center;
+    padding: 5px 10px;
+    border-radius: 10px;
+    background: #f0f0f0;
+}
     
     .header--name a {
         font-size: 1.7rem;

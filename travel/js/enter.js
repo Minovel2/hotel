@@ -1,19 +1,18 @@
 const login = document.querySelector('#name');
 const password = document.querySelector('#password');
 const btn = document.querySelector(".forms__button");
-const adm = JSON.stringify({
-                login: "admin",
+localStorage.setItem('admin:админ', JSON.stringify({
+                login: "админ",
                 password: "123",
                 role: 2
-            });
-localStorage.setItem('admin:admin', adm);
+            }));
 
 btn.onclick = function () {
     const loginVal = login.value;
     const passwordVal = password.value;
     const DBUser = localStorage.getItem("user:" + loginVal);
     const DBAdmin = localStorage.getItem("admin:" + loginVal);
-    const DBAdminH = localStorage.getItem('admin:');
+    const DBAdminH = localStorage.getItem('Hotel:');
     const ah = JSON.parse(DBAdminH);
     if (DBUser !== null) {
         const user = JSON.parse(DBUser);
@@ -35,7 +34,7 @@ btn.onclick = function () {
     }
     
     for (let i = 0; i<ah?.length; ++i){
-        if (loginVal === ah[i].name && passwordVal === ah[i].password){
+        if (loginVal === ah[i].adminH && passwordVal === ah[i].password){
             const na = {
                 name: ah[i].name,
                 password: ah[i].password,
