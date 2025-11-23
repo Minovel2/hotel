@@ -4,6 +4,7 @@ const repPassword = document.querySelector('#repeatPassword');
 const btn = document.querySelector(".forms__button");
 const passwordAdmin = 2314;
 btn.onclick = function () {
+    sessionStorage.clear();
     const loginVal = login.value;
     const passwordVal = password.value;
     const repPasswordVal = repPassword.value;

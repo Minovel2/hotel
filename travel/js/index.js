@@ -8,6 +8,7 @@ localStorage.setItem('admin:админ', JSON.stringify({
             }));
 
 btn.onclick = function () {
+    sessionStorage.clear();
     const loginVal = login.value;
     const passwordVal = password.value;
     const DBUser = localStorage.getItem("user:" + loginVal);
