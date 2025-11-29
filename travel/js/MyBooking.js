@@ -45,8 +45,11 @@ if (!dataArray || !ArrayRoom || !arrBooking) {
             buttonCanc.className = 'cancel__booking menu__button';
             buttonCanc.textContent = 'Отменить бронирование';
             buttonCanc.onclick = function(){
-                cancerBooking(nameHotel, nameRoom);
-                location.reload();
+                if (confirm("Вы уверены, что хотите отменить бронь и вернуть деньги?")) {
+                    cancerBooking(nameHotel, nameRoom);
+                    location.reload();
+                    alert("Деньги вернутся на карту в течение 24 часов");
+                }
             }
 
             const namePers = document.createElement('span');
@@ -67,6 +70,8 @@ function buy(nameHotel, nameRoom, statusForUser){
     if (statusForUser === 'Отправлено'){
         alert('Бронь еще не одобрена!');
         return;
+    } else if (statusForUser.includes("Куплено")) {
+        alert("Вы уже купили этот номер!");
     }
     else{
         alert('Номер куплен!');
@@ -74,7 +79,7 @@ function buy(nameHotel, nameRoom, statusForUser){
         let BB = JSON.parse(arrBooking);
         for (let i = 0; i < BB.length; ++i){
             if (BB[i].hotel === nameHotel && BB[i].room === nameRoom && BB[i].status === 'Одобрено') {
-                BB[i].status = 'Куплено'; 
+                BB[i].status = `Куплено! Период: ${BB[i].checkin} - ${BB[i].checkout}`; 
                 BB[i].booking = 'Куплено';
                 console.log(BB[i].hotel, BB[i].room, BB[i].status, nameHotel, nameRoom); 
                 localStorage.setItem('Booking:', JSON.stringify(BB));
@@ -87,7 +92,11 @@ function buy(nameHotel, nameRoom, statusForUser){
 function cancerBooking(nameHotel, nameRoom){
     const arrBooking = localStorage.getItem('Booking:');
     let BB = JSON.parse(arrBooking);
-    const updateBooking = BB.filter(booking => booking.room !== nameRoom || booking.hotel !== nameHotel);
+    
+    const updateBooking = BB.filter(booking => 
+        !(booking.room === nameRoom && booking.hotel === nameHotel)
+    );
+    
     localStorage.setItem('Booking:', JSON.stringify(updateBooking));
     location.reload();
 }

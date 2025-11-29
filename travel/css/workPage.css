@@ -71,8 +71,9 @@
         }
 
         .small_icon {
-            width: 40px;
-            height: 40px;
+            width: 35px;
+            height: 35px;
+            display: block;
             border-radius: 50%;
             object-fit: cover;
             transition: transform 0.3s ease;
@@ -282,6 +283,13 @@
             background: var(--gray-color);
         }
 
+        .status__ind4 {
+    background: #fbbf24; /* Желтый цвет */
+    width: 12px;
+    height: 12px;
+    border-radius: 50%;
+}
+
         .booking__wrap.show {
     transform: translate(-50%, -50%) scale(1);
 }
@@ -325,6 +333,8 @@
 }
         .booking__wrap {
             text-align: center;
+            position: relative;
+            z-index: 1;
         }
 
         .booking__h {
@@ -356,8 +366,9 @@
 
         .close {
             position: absolute;
-            top: 1rem;
-            right: 1rem;
+            top: -30px;
+            right: -20px;
+            z-index: 10;
             background: none;
             border: none;
             cursor: pointer;
@@ -496,3 +507,28 @@
                 grid-template-columns: 1fr;
             }
         }
+        
+.date-picker {
+  display: flex;
+  gap: 20px;
+  margin: 20px 0;
+  justify-content: center;
+}
+
+.date-input {
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+}
+
+.date-input-field {
+  padding: 10px;
+  border: 1px solid #ddd;
+  border-radius: 5px;
+  font-size: 16px;
+}
+
+.date-input label {
+  font-weight: bold;
+  color: #333;
+}

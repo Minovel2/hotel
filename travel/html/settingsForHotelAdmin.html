@@ -15,6 +15,8 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Great+Vibes&family=Lobster&display=swap" rel="stylesheet">
+    <!-- Добавьте Flatpickr -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flatpickr/dist/flatpickr.min.css">
     <link rel="stylesheet" href="../css/settingsForHotelAdmin.css">
 </head>
 <body>
@@ -39,23 +41,23 @@
 
                 <h1 class="about">ЗАЯВКИ НА БРОНИРОВАНИЕ:</h1>
 
-
-                <!--
-                <div class="booking">
-                    <h1 class="booking__HotelName">Hotel Guatemala</h1>
-                    <h1 class="booking__RoomName">Семейный номер</h1>
-                    <button class="buy__room menu__button">Одобрить</button>
-                    <button class="cancel__booking menu__button">Отклонить</button>
-                    <div>Matvey</div>
+                <!-- Модальное окно для календаря -->
+                <div id="calendarModal" class="modal">
+                    <div class="modal-content">
+                        <span class="close">&times;</span>
+                        <h3>Календарь бронирований</h3>
+                        <div id="calendarContainer"></div>
+                    </div>
                 </div>
-                -->
             
             </div>
         </div>
        
-        
     </main>
 
+    <!-- Добавьте Flatpickr скрипты -->
+    <script src="https://cdn.jsdelivr.net/npm/flatpickr"></script>
+    <script src="https://cdn.jsdelivr.net/npm/flatpickr/dist/l10n/ru.js"></script>
     <script src="../js/settingsForHotelAdmin.js"></script>
 </body>
 </html>

@@ -12,14 +12,8 @@ item__button.forEach((item__button, index) => {
 });
 */
 
-
-
-
-
-
 console.log(localStorage);
-
-
+const requestMessage = "Заявка отправлена, ждите подтверждения от администрации отеля";
 
 const dataArray = localStorage.getItem('Hotel:');
 const ArrayRoom = localStorage.getItem('Room:');
@@ -36,6 +30,7 @@ if (!dataArray || !ArrayRoom) {
 
     for (let i = 0; i < ss.length; ++i) {
         const name = ss[i].name;
+
         const descr = ss[i].description;
 
         const hotelItem = document.createElement('li');
@@ -58,7 +53,6 @@ if (!dataArray || !ArrayRoom) {
 
         const menu = document.createElement('ul');
         menu.className = 'menu__ul';
-
 
         for (let j = 0; j < rr.length; ++j) {
             const nameHotel = rr[j].hotel;
@@ -87,13 +81,11 @@ if (!dataArray || !ArrayRoom) {
                 const statusDiv = document.createElement('div');
                 statusDiv.className = 'status__el';
 
-
                 const statusText = document.createElement('p');
                 statusText.textContent = "Свободно";
                 statusText.className = 'status__p';
 
                 const statusIndicator = document.createElement('div');
-
 
                 let isBooked = false;
 
@@ -105,17 +97,32 @@ if (!dataArray || !ArrayRoom) {
                             isBooked = true; 
                             break; 
                         }
+
                         if (bb[g].booking === 'Куплено') {
-                          statusText.textContent = 'Куплено';
+                          statusText.textContent = `Куплено. Период: ${bb[g].checkin}  ---  ${bb[g].checkout}`;
                           statusIndicator.className = 'status__ind3';
                           isBooked = true; 
                           break; 
                       }
+
+                      if (bb[g].booking === requestMessage) {
+                          statusText.textContent = requestMessage;
+                          statusIndicator.className = 'status__ind4';
+                          isBooked = true; 
+                          break; 
+                      }
+
+                      if (bb[g].booking === "Одобрено, ожидание оплаты") {
+                          statusText.textContent = "Одобрено, ожидание оплаты";
+                          statusIndicator.className = 'status__ind4';
+                          isBooked = true; 
+                          break; 
+                      }
+
                     }
                 }
                     
                 if (!isBooked) {
-                    //console.log(name, nameRoom);
                     statusText.textContent = 'Свободно';
                     statusText.className = 'status__p';
                     statusIndicator.className = 'status__ind1';
@@ -146,6 +153,11 @@ if (!dataArray || !ArrayRoom) {
   }
 }
 
+function closeBooking() {
+    document.querySelector(".booking").classList.remove("show");
+    document.querySelector(".MAIN__wrap").classList.remove('blur');
+    document.getElementById("overlay").classList.remove("show");
+}
 
 //Открытие бронирования
 function openBooking(nameHotel, nameRoom) {
@@ -153,48 +165,132 @@ function openBooking(nameHotel, nameRoom) {
     document.querySelector(".MAIN__wrap").classList.add('blur');
     document.getElementById("overlay").classList.add("show");
 
+    // Сброс дат при открытии
+    document.getElementById('checkin-date').value = '';
+    document.getElementById('checkout-date').value = '';
+
+    const bookedDates = getBookedDates(nameHotel, nameRoom);
+    console.log(bookedDates);
+    
+    // Блокируем занятые даты
+    setupDatePickerWithBlockedDates(bookedDates);
+
     const bookingInfo = document.querySelector('.confirm');
     bookingInfo.onclick = function(){
       confirmBooking(nameHotel, nameRoom);
     }
 }
 
-function closeBooking() {
-    document.querySelector(".booking").classList.remove("show");
-    document.querySelector(".MAIN__wrap").classList.remove('blur');
-    document.getElementById("overlay").classList.remove("show");
+
+function getBookedDates(nameHotel, nameRoom) {
+    const arrBooking = localStorage.getItem('Booking:');
+    if (!arrBooking) return [];
+    
+    const BB = JSON.parse(arrBooking);
+    const bookedDates = [];
+    
+    for (let i = 0; i < BB.length; i++) {
+        if (BB[i].hotel === nameHotel && BB[i].room === nameRoom) {
+            bookedDates.push({
+                checkin: BB[i].checkin,
+                checkout: BB[i].checkout
+            });
+        }
+    }
+    return bookedDates;
+}
+
+// Функция для блокировки занятых дат через
+function setupDatePickerWithBlockedDates(bookedDates) {
+    // Преобразуем занятые периоды в массив заблокированных дат
+    const disabledDates = [];
+    
+    bookedDates.forEach(period => {
+        // Блокируем весь период от checkin до checkout
+        const start = new Date(period.checkin);
+        const end = new Date(period.checkout);
+        
+        // Добавляем все даты в периоде в массив заблокированных
+        const currentDate = new Date(start);
+        while (currentDate <= end) {
+            disabledDates.push(currentDate.toISOString().split('T')[0]);
+            currentDate.setDate(currentDate.getDate() + 1);
+        }
+    });
+
+    console.log('Заблокированные даты:', disabledDates);
+
+
+    flatpickr("#checkin-date", {
+        dateFormat: "Y-m-d",
+        minDate: "today",
+        locale: "ru",
+        disable: disabledDates,
+        onChange: function(selectedDates, dateStr, instance) {
+            // При выборе даты заезда обновляем дату выезда
+            if (selectedDates[0]) {
+                checkoutFP.set('minDate', selectedDates[0]);
+            }
+        }
+    });
+
+
+    const checkoutFP = flatpickr("#checkout-date", {
+        dateFormat: "Y-m-d",
+        minDate: "today",
+        locale: "ru",
+        disable: disabledDates,
+    });
 }
 
 function confirmBooking(nameHotel, nameRoom) {
-    document.querySelector(".booking__wrap").classList.remove("show");
-    document.querySelector(".MAIN__wrap").classList.remove('blur'); 
+    const checkinDate = document.getElementById('checkin-date').value;
+    const checkoutDate = document.getElementById('checkout-date').value;
+    
+    // Проверка заполнения дат
+    if (!checkinDate || !checkoutDate) {
+        alert('Пожалуйста, выберите даты заезда и выезда');
+        return;
+    }
+    
+    // Проверка что дата выезда после даты заезда
+    if (checkoutDate < checkinDate) {
+        alert('Дата выезда должна быть после даты заезда');
+        return;
+    }
+
+    document.querySelector(".booking").classList.remove("show");
+    document.querySelector(".MAIN__wrap").classList.remove('blur');
+    document.getElementById("overlay").classList.remove("show");
 
     const arrBooking = localStorage.getItem('Booking:');
     let BB = arrBooking ? JSON.parse(arrBooking) : [];
     let pp = JSON.parse(user);
 
     let flag = true;
-    for (let i =0; i<BB.length; ++i){
+    for (let i = 0; i < BB.length; ++i){
       if (BB[i].hotel === nameHotel && BB[i].room === nameRoom){
         flag = false;
-        alert('Отель уже забронирован!');
+        alert('Вы уже отправили заявку на бронь, либо отель уже забронирован!');
         return;
       }
     }
     if (flag){
-        BB.push({ hotel: nameHotel, room: nameRoom, person: pp.login, booking: 'Забронировано', status: 'Отправлено'});
+        BB.push({ 
+            hotel: nameHotel, 
+            room: nameRoom, 
+            person: pp.login, 
+            booking: requestMessage, 
+            status: 'Отправлено', 
+            checkin: checkinDate,
+            checkout: checkoutDate
+        });
         localStorage.setItem('Booking:', JSON.stringify(BB));
 
-        //const stat = document.querySelector('.status__p');
-        //stat.textContent = 'Забронировано';
         alert('Бронь отправлена!');
         location.reload();
     }
-    
-
-   
 }
-
 
 //Roole
 const admin = sessionStorage.getItem("admin");
@@ -209,14 +305,14 @@ if (admin) {
     document.querySelector(".pref2").classList.add("show");
 } else if (user) {
     console.log("User found:", user);
-    document.querySelector(".pref1").classList.add("show");  // Замена кнопки в зависимости от роли
+    document.querySelector(".pref1").classList.add("show");
     document.querySelector(".pref2").classList.add("hide");
 } else if (adminH){
     console.log("Admin is Hotel found:", adminH);
     document.querySelectorAll(".menu__button").forEach(function(button) {
       button.classList.add("hide");
     });
-    document.querySelector(".pref3").classList.add("show");  // Замена кнопки в зависимости от роли
+    document.querySelector(".pref3").classList.add("show");
     document.querySelector(".pref2").classList.add("hide");
 } else{
     console.error("Neither user nor admin exists.");

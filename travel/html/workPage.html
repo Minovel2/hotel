@@ -14,6 +14,9 @@
     <link href="https://fonts.googleapis.com/css2?family=Lobster&display=swap" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css2?family=Great+Vibes&family=Lobster&display=swap" rel="stylesheet">
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flatpickr/dist/flatpickr.min.css">
+<script src="https://cdn.jsdelivr.net/npm/flatpickr"></script>
+<script src="https://cdn.jsdelivr.net/npm/flatpickr/dist/l10n/ru.js"></script>
     <link rel="stylesheet" href="../css/workPage.css">
     <style>
     </style>
@@ -51,6 +54,18 @@
     <div class="booking" id="bookingModal">
     <div class="booking__wrap">
         <h1 class="booking__h">Бронирование номера</h1>
+        <!-- начало ввода даты -->
+        <div class="date-picker">
+    <div class="date-input">
+      <label for="checkin-date">Дата заезда:</label>
+      <input type="date" id="checkin-date" class="date-input-field">
+    </div>
+    <div class="date-input">
+      <label for="checkout-date">Дата выезда:</label>
+      <input type="date" id="checkout-date" class="date-input-field">
+    </div>
+  </div>
+  <!-- конец ввода даты -->
         <p class="booking__p">Для подтверждения нажмите кнопку ниже</p>
         <button class="confirm" onclick="confirmBooking()">Подтвердить</button>
         <button class="close" onclick="closeBooking()"><img class="small_icon" src="../image/close.png" alt="Закрыть"></button>
