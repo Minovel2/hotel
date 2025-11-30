@@ -10,7 +10,10 @@ btn.onclick = function () {
     const repPasswordVal = repPassword.value;
     const DBUser = localStorage.getItem("user:" + loginVal);
     
-    if (DBUser === null) {
+    if (loginVal.length == 0 || passwordVal.length == 0 || repPasswordVal.length == 0) {
+        alert("Заполните все поля");
+    }
+    else if (DBUser === null) {
         if (passwordVal == repPasswordVal) {
             const user = JSON.stringify({
                 login: loginVal,
