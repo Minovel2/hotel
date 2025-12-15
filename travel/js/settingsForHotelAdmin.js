@@ -79,7 +79,7 @@ if (!dataArray || !ArrayRoom || !arrBooking) {
             booking__wrap.appendChild(stat);
             booking__wrap.appendChild(buttonConf);
             booking__wrap.appendChild(buttonCanc);
-            booking__wrap.appendChild(buttonCalendar); // Добавляем кнопку календаря
+            booking__wrap.appendChild(buttonCalendar);
             bookingItem.appendChild(booking__wrap);
         }
     }   
@@ -212,6 +212,8 @@ function confirmBooking(nameHotel, nameRoom){
         if (BB[i].hotel === nameHotel && BB[i].room === nameRoom && BB[i].booking){
             if (BB[i].booking == "Куплено") {
                 alert("Ошибка! Уже куплено.");
+            } else if(BB[i].booking.includes("Одобрено")) {
+                alert("Ошибка! Уже одобрено");
             } else {
             BB[i].status = 'Одобрено';
             BB[i].booking = "Одобрено, ожидание оплаты";

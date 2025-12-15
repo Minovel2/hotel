@@ -281,7 +281,7 @@ function confirmBooking(nameHotel, nameRoom) {
             room: nameRoom, 
             person: pp.login, 
             booking: requestMessage, 
-            status: 'Отправлено', 
+            status: 'Ожидает подтверждения', 
             checkin: checkinDate,
             checkout: checkoutDate
         });

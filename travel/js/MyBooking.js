@@ -38,17 +38,34 @@ if (!dataArray || !ArrayRoom || !arrBooking) {
             buttonConf.textContent = 'Купить';
             buttonConf.onclick = function(){
                 buy(nameHotel, nameRoom, statusForUser);
-                
             }
 
             const buttonCanc = document.createElement('button');
             buttonCanc.className = 'cancel__booking menu__button';
             buttonCanc.textContent = 'Отменить бронирование';
             buttonCanc.onclick = function(){
-                if (confirm("Вы уверены, что хотите отменить бронь и вернуть деньги?")) {
+                const arrBooking = localStorage.getItem('Booking:');
+                const BB = JSON.parse(arrBooking);
+                let status;
+                for (const booking of BB) {
+                    if (booking.room === nameRoom && booking.hotel === nameHotel) {
+                        status = booking.booking;
+                        break;
+                    }
+                }
+                if (status == "Одобрено, ожидание оплаты" || status == "Заявка отправлена, ждите подтверждения от администрации отеля") {
+                    if (confirm("Вы уверены, что хотите отменить бронь?")) {
                     cancerBooking(nameHotel, nameRoom);
+                    alert("Бронь отменена!");
                     location.reload();
+                }
+                }
+                else {
+                    if (confirm("Вы уверены, что хотите отменить бронь и вернуть деньги?")) {
+                    cancerBooking(nameHotel, nameRoom);
                     alert("Деньги вернутся на карту в течение 24 часов");
+                    location.reload();
+                }
                 }
             }
 
@@ -67,7 +84,7 @@ if (!dataArray || !ArrayRoom || !arrBooking) {
 }
 
 function buy(nameHotel, nameRoom, statusForUser){
-    if (statusForUser === 'Отправлено'){
+    if (statusForUser === 'Ожидает подтверждения'){
         alert('Бронь еще не одобрена!');
         return;
     } else if (statusForUser.includes("Куплено")) {
